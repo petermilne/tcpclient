@@ -1,0 +1,26 @@
+Simplest possible C TCP/IP client example
+
+./tcpclient HOST PORT
+
+Connects to port and reads data "forever".
+
+Example usage: replaces ACQ400 standard streaming command:
+Streaming data with standard tool "nc"
+[pgm@hoy5 ~]$ nc acq2106_059 4210 | pv > /dev/null
+1.81MiB 0:00:04 [ 750KiB/s] [  <=>  
+
+New Example:
+
+Streaming data with custom TCP/IP client socket program
+pgm@hoy5 TCPCLIENT]$ ./tcpclient acq2106_059 4210 | pv > /dev/null
+2.39MiB 0:00:05 [ 662KiB/s] [      <=>   
+3.09MiB 0:00:06 [ 710KiB/s] [        <=>  
+
+
+What's the point of this?. 
+tcpclient strips out the bare minimum from nc to make this work.
+If you're simply outputting to stdout, there's no point, simply use nc.
+
+However, users may want to build on the simple data connection to add other data processing.
+
+
