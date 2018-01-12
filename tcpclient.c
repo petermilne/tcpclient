@@ -1,6 +1,8 @@
 /* 
  * tcpclient.c - A simple TCP client
  * usage: tcpclient <host> <port>
+ * original: https://www.cs.cmu.edu/afs/cs/academic/class/15213-f99/www/class26/tcpclient.c
+ * Adapted to connect to a port and "read forever"
  */
 #include <stdio.h>
 #include <stdlib.h>
