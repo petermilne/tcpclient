@@ -24,3 +24,8 @@ If you're simply outputting to stdout, there's no point, simply use nc.
 However, users may want to build on the simple data connection to add other data processing.
 
 
+Windows example
+- recommend: use git-bash to git-clone this project
+- use cygwin to compile and run. cygwin options can include gcc and pv
+
+
