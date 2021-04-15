@@ -24,3 +24,9 @@ If you're simply outputting to stdout, there's no point, simply use nc.
 However, users may want to build on the simple data connection to add other data processing.
 
 
+To build on a Linux host:
+
+make tcpclient
+
+For windows build, we recommend using gcc and the gnu libraries, eg mingw.
+
