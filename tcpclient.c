@@ -33,14 +33,18 @@ int main(int argc, char **argv) {
     struct hostent *server;
     char *hostname;
     char buf[BUFSIZE];
+    int writer = 0;
 
     /* check command line arguments */
-    if (argc != 3) {
-       fprintf(stderr,"usage: %s <hostname> <port>\n", argv[0]);
+    if (argc < 3) {
+       fprintf(stderr,"usage: %s <hostname> <port> [0:read 1: write]\n", argv[0]);
        exit(0);
     }
     hostname = argv[1];
     portno = atoi(argv[2]);
+    if (argc == 4){
+        writer = atoi(argv[3]);
+    }
 
     /* socket: create the socket */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -65,12 +69,19 @@ int main(int argc, char **argv) {
     if (connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0) 
       error("ERROR connecting");
 
-    while((n = read(sockfd, buf, BUFSIZE)) > 0){
-	write(1, buf, n);
+    if (writer == 0){
+        while((n = read(sockfd, buf, BUFSIZE)) > 0){
+	    write(1, buf, n);
+        }
+    }else{
+        while((n = read(0, buf, BUFSIZE)) > 0){
+            int nw = write(sockfd, buf, n);
+            if (nw < n){
+                error("ERROR writing to socket");
+                break;
+            }
+        }
     }
-    if (n < 0) 
-      error("ERROR reading from socket");
-    printf("Echo from server: %s", buf);
     close(sockfd);
     return 0;
 }

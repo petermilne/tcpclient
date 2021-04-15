@@ -30,3 +30,9 @@ make tcpclient
 
 For windows build, we recommend using gcc and the gnu libraries, eg mingw.
 
+Windows example
+- recommend: use git-bash to git-clone this project
+- use cygwin to compile and run. cygwin options can include gcc and pv
+- or use WSL
+
+
